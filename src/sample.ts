@@ -1,4 +1,5 @@
 {
   const name = 'shimopino';
-  console.log(name);
+  name.toLowerCase();
+  // console.log(name)
 }
