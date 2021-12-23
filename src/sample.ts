@@ -1,4 +1,5 @@
-const name = "shimopino";
-
-console.log(name);
-
+{
+  const name = 'shimopino';
+  name.toLowerCase();
+  // console.log(name)
+}
