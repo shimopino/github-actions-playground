@@ -81,3 +81,48 @@ jobs:
       - run: npm ci
       - run: npm run lint
 ```
+
+## プルリクを出す
+
+ブランチを切って以下のコードの修正を行う。
+
+```ts
+{
+  const name = "shimopino";
+  console.log(name);
+}
+```
+
+またワークフローで静的解析を実行した際にエラーを発生させるために、一時的にエラーとして報告されるようにルールの変更をおこなっておく。
+
+```js
+rules: {
+  "no-console": "error",
+},
+```
+
+これでプルリクを作成すると、以下の様にワークフローが起動していることがわかる。
+
+![](assets/pull-request-workflow.png)
+
+実際にワークフローのログを確認すると、ESLint のルール変更に合わせて、静的解析が失敗していることがわかる。
+
+![](assets/workflow-log.png)
+
+ここで ESLint が成功する様に、コードを以下の様に編集する。
+
+```ts
+{
+  const name = "shimopino";
+  name.toLowerCase();
+  // console.log(name)
+}
+```
+
+ここで再度コミットをプッシュすると、自動的にワークフローが起動していることがわかる。
+
+![](assets/rerun-workflow.png)
+
+静的解析が成功すれば以下の様に、全ての検査項目をパスしていることがわかる。
+
+![](assets/pass-eslint.png)
