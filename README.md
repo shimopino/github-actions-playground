@@ -1,5 +1,7 @@
 # github-actions-playgroun
 
+## ESLint の前準備
+
 Github Actions で自動的に ESLint を適用する実験を行うために、以下の条件で設定ファイルを作成する。
 
 ```bash
@@ -56,3 +58,26 @@ console.log(name);
 ```
 
 この出力結果を Github Actions で再現できる様にする。
+
+## Github Actions
+
+以下のワークフローを作成する。
+
+```yml
+name: eslint check
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  run-eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node
+        with:
+          node-version: "14"
+      - run: npm ci
+      - run: npm run lint
+```

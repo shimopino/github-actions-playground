@@ -1,0 +1,16 @@
+name: eslint check
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  run-eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node
+        with:
+          node-version: "14"
+      - run: npm ci
+      - run: npm run lint
