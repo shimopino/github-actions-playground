@@ -1,4 +1,4 @@
-const name = "shimopino";
-
-console.log(name);
-
+{
+  const name = 'shimopino';
+  console.log(name);
+}
